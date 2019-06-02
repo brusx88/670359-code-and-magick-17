@@ -180,7 +180,27 @@
     <p class="setup-similar-label">Петр Петров</p>
   </div>
 </template>
-<script src="js/main.js"></script>
+<script>
+var fireballSize = 22;
+var wizardSpeed = 3;
+var wizardWidth = 70;
+var getWizardX = function (width) {
+  return 300;
+};
+var getWizardY = function (height) {
+  return 150;
+};
+var getWizardHeight = function () {
+  return 1.337 * wizardWidth;
+};
+var getFireballSpeed = function (left) {
+  if (left) {
+    return 5;
+  } return 2;
+};
+
+
+</script>
 <script src="js/game.js"></script>
 
 </body>
