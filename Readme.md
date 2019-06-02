@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Vadim Brusinsky](https://up.htmlacademy.ru/javascript/17/user/670359).
-* Наставник: `Неизвестно`.
+* Наставник: `Михаил Устенко`.
 
 ---
 
