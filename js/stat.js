@@ -12,9 +12,8 @@ var COL_HEIGHT = 90;
 var barHeight = CLOUD_HEIGHT - COL_HEIGHT - FONT_GAP - FONT_GAP;
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT)
+  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
-
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -28,14 +27,14 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var colors = ['rgba(255, 0, 0, 1)', 'rgba(94, 105, 155, 0.72)', 'rgba(83, 111, 235, 0.72)', 'rgba(83, 111, 235, 0.72)'];
-
-for (var i = 0; i < colors.length; i++) {
-
-}
+var randomNumber = function (min, max) {
+  return Math.random() * (max - min) + min;
+};
 
 window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
+  var SHADOW_X = CLOUD_X + GAP;
+  var SHADOW_Y = CLOUD_Y + GAP;
+  renderCloud(ctx, SHADOW_X, SHADOW_Y, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
   ctx.font = '16px PT Mono';
@@ -46,11 +45,25 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = getMaxElement(times);
 
-
   for (var i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], CLOUD_X + TEXT_WIDTH - GAP + (COL_HEIGHT) * i, CLOUD_X + CLOUD_X + TEXT_WIDTH);
-    ctx.fillStyle = colors[i];
-    ctx.fillRect(CLOUD_X + TEXT_WIDTH - GAP + (COL_HEIGHT) * i, COL_HEIGHT, BAR_WIDTH, (barHeight * times[i]) / maxTime);
+    var COORDINATE_X = CLOUD_X + TEXT_WIDTH - GAP + (COL_HEIGHT) * i;
+    var COORDINATE_Y = CLOUD_X + CLOUD_X + GAP + FONT_GAP + FONT_GAP;
+    var WIDTH = BAR_WIDTH;
+    var HEIGHT = -((barHeight * times[i]) / maxTime);
+    var SCORE = times[i].toFixed(0);
+    var SCORE_Y = COORDINATE_Y + HEIGHT - 5;
+    var NAMES_Y = CLOUD_X + CLOUD_X + TEXT_WIDTH + GAP;
 
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = 'rgba(0, 0, ' + randomNumber(110, 255) + ', 0.7)';
+    }
+
+    ctx.fillRect(COORDINATE_X, COORDINATE_Y, WIDTH, HEIGHT);
+    ctx.fillStyle = '#000';
+    ctx.fillText(names[i], COORDINATE_X, NAMES_Y);
+    ctx.fillText(SCORE, COORDINATE_X, SCORE_Y);
   }
 };
+
