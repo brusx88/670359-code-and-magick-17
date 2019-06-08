@@ -26,7 +26,7 @@ function getMaxElement(arr) {
 
   return maxElement;
 }
-git addEventListener
+
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
