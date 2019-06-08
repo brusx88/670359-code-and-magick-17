@@ -10,12 +10,12 @@ var TEXT_WIDTH = 50;
 var BAR_WIDTH = 40;
 var COL_HEIGHT = 90;
 var barHeight = CLOUD_HEIGHT - COL_HEIGHT - FONT_GAP - FONT_GAP;
-var renderCloud = function (ctx, x, y, color) {
+function renderCloud(ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function (arr) {
+function getMaxElement(arr) {
   var maxElement = arr[0];
 
   for (var i = 0; i < arr.length; i++) {
@@ -27,7 +27,7 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var randomNumber = function (min, max) {
+function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 };
 
@@ -48,7 +48,6 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var COORDINATE_X = CLOUD_X + TEXT_WIDTH - GAP + (COL_HEIGHT) * i;
     var COORDINATE_Y = CLOUD_X + CLOUD_X + GAP + FONT_GAP + FONT_GAP;
-    var WIDTH = BAR_WIDTH;
     var HEIGHT = -((barHeight * times[i]) / maxTime);
     var SCORE = times[i].toFixed(0);
     var SCORE_Y = COORDINATE_Y + HEIGHT - 5;
@@ -60,7 +59,7 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = 'rgba(0, 0, ' + randomNumber(110, 255) + ', 0.7)';
     }
 
-    ctx.fillRect(COORDINATE_X, COORDINATE_Y, WIDTH, HEIGHT);
+    ctx.fillRect(COORDINATE_X, COORDINATE_Y, BAR_WIDTH, HEIGHT);
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], COORDINATE_X, NAMES_Y);
     ctx.fillText(SCORE, COORDINATE_X, SCORE_Y);
