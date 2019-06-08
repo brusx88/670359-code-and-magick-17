@@ -13,7 +13,7 @@ var barHeight = CLOUD_HEIGHT - COL_HEIGHT - FONT_GAP - FONT_GAP;
 function renderCloud(ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
-};
+}
 
 function getMaxElement(arr) {
   var maxElement = arr[0];
@@ -25,11 +25,11 @@ function getMaxElement(arr) {
   }
 
   return maxElement;
-};
-
+}
+git addEventListener
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
-};
+}
 
 window.renderStatistics = function (ctx, names, times) {
   var SHADOW_X = CLOUD_X + GAP;
