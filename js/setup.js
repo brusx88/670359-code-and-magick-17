@@ -61,19 +61,19 @@ for (var i = 0; i < 4; i++) {
   });
 }
 
-function renderWizards() {
+function renderWizards(index) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[k].name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[k].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[k].eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards[index].name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards[index].coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[index].eyesColor;
 
   return wizardElement;
 }
 
 var fragment = document.createDocumentFragment();
-for (var k = 0; k < wizards.length; k++) {
-  fragment.appendChild(renderWizards([k]));
+for (var j = 0; j < wizards.length; j++) {
+  fragment.appendChild(renderWizards(j));
 }
 
 similarListElement.appendChild(fragment);
