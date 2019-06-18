@@ -1,7 +1,63 @@
 'use strict';
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = document.querySelector('.setup-close');
+var setup = document.querySelector('.setup');
+var setupWizard = document.querySelector('.setup-wizard');
+var setupCoat = setupWizard.querySelector('.wizard-coat');
+var setupEyes = setupWizard.querySelector('.wizard-eyes');
+var setupFireball = document.querySelector('.setup-fireball-wrap');
+
+setupCoat.addEventListener('click', function () {
+  setupCoat.style.fill = coatColors[rand(0, coatColors.length - 1)];
+});
+
+setupEyes.addEventListener('click', function () {
+  setupEyes.style.fill = eyesColors[rand(0, eyesColors.length - 1)];
+});
+
+setupFireball.addEventListener('click', function () {
+  setupFireball.style.background = fireBalls[rand(0, fireBalls.length - 1)];
+});
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown',
+    function (evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        closePopup();
+      }
+    });
+
 
 document.querySelector('.setup-similar').classList.remove('hidden');
 
@@ -20,6 +76,15 @@ var names = [
   'Люпита',
   'Вашингтон'
 ];
+
+var fireBalls = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
 var surnames = [
   'да Марья',
   'Верон',
