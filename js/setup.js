@@ -15,7 +15,7 @@ setupCoat.addEventListener('click', function () {
 });
 
 setupEyes.addEventListener('click', function () {
-  setupEyes.style.fill = eyesColors[rand(0, coatColors.length - 1)];
+  setupEyes.style.fill = eyesColors[rand(0, eyesColors.length - 1)];
 });
 
 setupFireball.addEventListener('click', function () {
