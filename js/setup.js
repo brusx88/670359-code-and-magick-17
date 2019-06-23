@@ -26,11 +26,12 @@ function onPopupEscPress(evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
   }
-};
+}
+
 function openPopup() {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
-};
+}
 
 function closePopup() {
   setup.classList.add('hidden');
