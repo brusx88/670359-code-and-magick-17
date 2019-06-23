@@ -22,20 +22,22 @@ setupFireball.addEventListener('click', function () {
   setupFireball.style.background = fireBalls[rand(0, fireBalls.length - 1)];
 });
 
-var onPopupEscPress = function (evt) {
+function onPopupEscPress(evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
   }
 };
-var openPopup = function () {
+function openPopup() {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function () {
+function closePopup() {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
-};
+  setup.style.left = 50 + '%';
+  setup.style.top = 80 + 'px';
+}
 
 setupOpen.addEventListener('click', function () {
   openPopup();
@@ -142,3 +144,68 @@ for (var j = 0; j < wizards.length; j++) {
 }
 
 similarListElement.appendChild(fragment);
+
+/* mousemove */
+
+var dialogHandler = setup.querySelector('.upload');
+
+var eventsHandler = function (evt, element) {
+  evt.preventDefault();
+  var dropped = false;
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  function onMouseMove(moveEvt) {
+    moveEvt.preventDefault();
+    dropped = true;
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY,
+    };
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    if (element) {
+      element.style.top = (setup.offsetTop - shift.y) + 'px';
+      element.style.left = (setup.offsetLeft - shift.x) + 'px';
+    } else {
+      evt.target.style.top = (evt.target.offsetTop - shift.y) + 'px';
+      evt.target.style.left = (evt.target.offsetLeft - shift.x) + 'px';
+    }
+
+  }
+  function onMouseUp(upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+    if (dropped) {
+      var onClickPreventDefault = function (evn) {
+        evn.preventDefault();
+        dialogHandler.removeEventListener('click', onClickPreventDefault);
+      };
+      dialogHandler.addEventListener('click', onClickPreventDefault);
+    }
+  }
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+};
+
+dialogHandler.addEventListener('mousedown', function (event) {
+  eventsHandler(event, setup);
+});
+
+var setupArtefacts = document.querySelectorAll('.setup-artifacts-cell > img');
+for (var y = 0; y < setupArtefacts.length; y++) {
+  setupArtefacts[y].addEventListener('mousedown', function (event) {
+    eventsHandler(event);
+  });
+}

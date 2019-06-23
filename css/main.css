@@ -845,6 +845,12 @@ input[type=radio]:checked + .review-mark-label
     background: rgba(0, 0, 0, .1);
 }
 
+.setup-artifacts-cell  img
+{
+    position: absolute;
+    z-index: 1;
+}
+
 .setup-artifacts-cell:last-child
 {
     border-right-width: 1px;
